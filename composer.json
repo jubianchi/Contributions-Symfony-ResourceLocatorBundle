@@ -1,5 +1,5 @@
 {
-    "name"       : "hoathis/resource-locator-bundle",
+    "name"       : "hoathis/symfony-resource-locator-bundle",
     "description": "Symfony 2 resource locator bundle based on Hoa protocols.",
     "type"       : "symfony-bundle",
     "keywords"   : ["library", "hoa", "bundle", "symfony", "protocol", "locator"],
