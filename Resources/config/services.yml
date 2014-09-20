@@ -1,0 +1,93 @@
+parameters:
+    hoathis.locator.wrapper.class: Hoathis\Bundle\ResourceLocatorBundle\Wrapper
+    hoathis.locator.twig.loader.class: Hoathis\Bundle\ResourceLocatorBundle\Twig\Loader
+    hoathis.locator.twig.extension.class: Hoathis\Bundle\ResourceLocatorBundle\Twig\Extension
+    hoathis.locator.protocol.custom.class: Hoathis\Bundle\ResourceLocatorBundle\Protocol\CustomProtocol
+    hoathis.locator.protocol.bundles.class: Hoathis\Bundle\ResourceLocatorBundle\Protocol\BundlesProtocol
+    hoathis.locator.protocol.views.class: Hoathis\Bundle\ResourceLocatorBundle\Protocol\ViewsProtocol
+    hoathis.locator.protocol.assets.class: Hoathis\Bundle\ResourceLocatorBundle\Protocol\AssetsProtocol
+
+services:
+    hoathis.locator.wrapper:
+        class: %hoathis.locator.wrapper.class%
+
+    hoathis.locator.twig.loader:
+        class: %hoathis.locator.twig.loader.class%
+        arguments:
+            - @hoathis.locator.wrapper
+        tags:
+            - { name: twig.loader }
+
+    hoathis.locator.twig.extension:
+        class: %hoathis.locator.twig.extension.class%
+        arguments:
+            - @hoathis.locator.wrapper
+        tags:
+            - { name: twig.extension }
+
+    hoathis.locator.protocol.app:
+        class: %hoathis.locator.protocol.custom.class%
+        arguments:
+            - app
+            - %kernel.root_dir%
+        tags:
+            - { name: hoathis.locator.protocol }
+
+    hoathis.locator.protocol.src:
+        class: %hoathis.locator.protocol.custom.class%
+        arguments:
+            - src
+            - %kernel.root_dir%/../src
+        tags:
+            - { name: hoathis.locator.protocol }
+
+    hoathis.locator.protocol.web:
+        class: %hoathis.locator.protocol.custom.class%
+        arguments:
+            - web
+            - %kernel.root_dir%/../web
+        tags:
+            - { name: hoathis.locator.protocol }
+
+    hoathis.locator.protocol.bundles:
+        class: %hoathis.locator.protocol.bundles.class%
+        arguments:
+            - %kernel.bundles%
+        tags:
+            - { name: hoathis.locator.protocol }
+
+    hoathis.locator.protocol.config:
+        class: %hoathis.locator.protocol.custom.class%
+        arguments:
+            - config
+            - %kernel.root_dir%/config
+        tags:
+            - { name: hoathis.locator.bundles_aware, path: /Resources/config }
+            - { name: hoathis.locator.protocol }
+
+    hoathis.locator.protocol.resources:
+        class: %hoathis.locator.protocol.custom.class%
+        arguments:
+            - resources
+            - %kernel.root_dir%/Resources
+        tags:
+            - { name: hoathis.locator.bundles_aware, path: /Resources }
+            - { name: hoathis.locator.protocol }
+
+    hoathis.locator.protocol.views:
+        class: %hoathis.locator.protocol.custom.class%
+        arguments:
+            - views
+            - %kernel.root_dir%/Resources/views
+        tags:
+            - { name: hoathis.locator.bundles_aware, path: /Resources/views }
+            - { name: hoathis.locator.protocol }
+
+    hoathis.locator.protocol.assets:
+        class: %hoathis.locator.protocol.assets.class%
+        arguments:
+            - %kernel.root_dir%/../web/bundles
+            - %kernel.root_dir%/../web
+        tags:
+            - { name: hoathis.locator.protocol }
+
