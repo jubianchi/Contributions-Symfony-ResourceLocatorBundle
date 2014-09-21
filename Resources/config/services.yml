@@ -6,6 +6,7 @@ parameters:
     hoathis.locator.protocol.bundles.class: Hoathis\Bundle\ResourceLocatorBundle\Protocol\BundlesProtocol
     hoathis.locator.protocol.views.class: Hoathis\Bundle\ResourceLocatorBundle\Protocol\ViewsProtocol
     hoathis.locator.protocol.assets.class: Hoathis\Bundle\ResourceLocatorBundle\Protocol\AssetsProtocol
+    hoathis.locator.collector.class: Hoathis\Bundle\ResourceLocatorBundle\DataCollector\LocatorCollector
 
 services:
     hoathis.locator.wrapper:
@@ -90,4 +91,3 @@ services:
             - %kernel.root_dir%/../web
         tags:
             - { name: hoathis.locator.protocol }
-

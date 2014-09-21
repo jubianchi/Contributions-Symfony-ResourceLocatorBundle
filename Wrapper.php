@@ -18,7 +18,7 @@ class Wrapper extends Core\Protocol\Wrapper implements \IteratorAggregate, \Arra
     protected function register(Protocol $protocol)
     {
         if (false === in_array($protocol->getScheme(), stream_get_wrappers())) {
-            if (false === stream_wrapper_register($protocol->getScheme(), __CLASS__)) {
+            if (false === stream_wrapper_register($protocol->getScheme(), get_class($this))) {
                 throw new \RuntimeException('Unable to register wrapper for protocol ' . $protocol->getScheme() . '://');
             }
         }
@@ -71,7 +71,7 @@ class Wrapper extends Core\Protocol\Wrapper implements \IteratorAggregate, \Arra
 
     public function resolve($path, $exists = true)
     {
-        return self::realPath($path, $exists);
+        return static::realPath($path, $exists);
     }
 
     public static function realPath($path, $exists = true)

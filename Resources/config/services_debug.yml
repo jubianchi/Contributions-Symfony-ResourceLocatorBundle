@@ -1,0 +1,15 @@
+parameters:
+    hoathis.locator.wrapper.debug.class: Hoathis\Bundle\ResourceLocatorBundle\DebugWrapper
+    hoathis.locator.collector.class: Hoathis\Bundle\ResourceLocatorBundle\DataCollector\LocatorCollector
+
+services:
+    hoathis.locator.wrapper.debug:
+        class: %hoathis.locator.wrapper.debug.class%
+        arguments:
+            - @hoathis.locator.collector
+
+    hoathis.locator.collector:
+        class: %hoathis.locator.collector.class%
+        lazy: false
+        tags:
+            - { name: data_collector, template: views://LocatorCollector/collector.html.twig, id: hoathis.locator }

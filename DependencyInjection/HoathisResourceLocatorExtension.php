@@ -13,5 +13,11 @@ class HoathisResourceLocatorExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+
+        if ($container->getParameter('kernel.debug')) {
+            $loader->load('services_debug.yml');
+
+            $container->setDefinition('hoathis.locator.wrapper', $container->findDefinition('hoathis.locator.wrapper.debug'));
+        }
     }
 }
