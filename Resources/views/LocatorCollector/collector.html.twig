@@ -32,7 +32,9 @@
         <strong>Resources</strong>
         <span class="count">
             <span>{{ collector.resources|length }}</span>
-            <span>{{ collector.formatTime(collector.total) }}</span>
+            {% if collector.resources|length > 1 %}
+                <span>{{ collector.formatTime(collector.total) }}</span>
+            {% endif %}
         </span>
     </span>
 {% endblock %}
@@ -65,7 +67,7 @@
                     <tr>
                         <td>{{ key }}</td>
                         <td>{{ protocol.resources }}</td>
-                        <td>{{ collector.formatTime(protocol.time) }}</td>
+                        <td>{{ collector.formatTime(protocol.total) }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

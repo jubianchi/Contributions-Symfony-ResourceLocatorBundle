@@ -69,7 +69,7 @@ class LocatorCollector implements DataCollectorInterface
             );
         }
 
-        $this->data[self::NAME]['protocols'][$protocol]['time'] += $time;
+        $this->data[self::NAME]['protocols'][$protocol]['total'] += $time;
         $this->data[self::NAME]['protocols']['total'] += $time;
         $this->data[self::NAME]['protocols'][$protocol]['resources']++;
     }
